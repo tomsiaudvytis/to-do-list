@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebApi.Extensions;
 using WebApi.Middlewares;
 using WebApi.Services;
 
@@ -24,16 +25,7 @@ namespace WebApi
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "ToDo API",
-                    Description = "HomeWork",
-                });
-            });
-
+            services.AddSwaggerConfiguration();
             services.AddJwtAuthentication(Configuration["Authentication:Secret"]);
 
             services.AddScoped<IUserService, UserService>();
@@ -50,7 +42,7 @@ namespace WebApi
 
             app.UseSwagger();
             app.UseSwaggerUI(swagger => swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDo Api"));
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
