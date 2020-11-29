@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using WebApi.Middlewares;
 using WebApi.Services;
 
@@ -22,11 +21,11 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
             services.AddControllers();
-            
+            services.AddJwtAuthentication(Configuration["Authentication:Secret"]);
+
             services.AddScoped<IUserService, UserService>();
-            
+
             services.Configure<Authentication>(options => Configuration.GetSection("Authentication").Bind(options));
         }
 
@@ -41,11 +40,7 @@ namespace WebApi
 
             app.UseRouting();
 
-            app.UseCors(x => x
-                             .AllowAnyOrigin()
-                             .AllowAnyMethod()
-                             .AllowAnyHeader());
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseMiddleware<AuthenticationMiddleware>();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

@@ -1,8 +1,7 @@
-﻿using Common.Configurations;
-using Common.Interfaces.Services;
+﻿using Common.Interfaces.Services;
 using Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace WebApi.Controllers
 {
@@ -10,14 +9,10 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly Authentication _authentication;
         private readonly IUserService _userService;
 
-        public UserController(IOptions<Authentication> authentication, IUserService userService)
-        {
-            _userService = userService;
-            _authentication = authentication.Value;
-        }
+        public UserController(IUserService userService)
+            => _userService = userService;
 
         [HttpPost("Login")]
         public IActionResult Login([FromBody] AuthenticateRequest authenticateRequest)
@@ -30,6 +25,23 @@ namespace WebApi.Controllers
             }
 
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize(Policy = Policies.Admin)]
+        public IActionResult GetUsers(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return Ok(_userService.GetAll());
+            }
+
+            var user = _userService.GetByEmail(email);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(_userService.GetByEmail(email));
         }
     }
 }
