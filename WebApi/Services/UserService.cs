@@ -10,38 +10,19 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Common;
+using Common.Interfaces.Repositories;
 
 namespace WebApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly List<User> _users = new List<User>
-        {
-            new User
-            {
-                Id = 1,
-                FirstName = "Test",
-                LastName = "User",
-                Password = "1234567891012",
-                Email = "some@email.com",
-                Role = UserRoles.User
-            },
-            new User
-            {
-                Id = 2,
-                FirstName = "Test2",
-                LastName = "User2",
-                Password = "1234567891012",
-                Email = "some2@email.com",
-                Role = UserRoles.Admin
-            }
-        };
-
         private readonly Authentication _authentication;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IOptions<Authentication> authentication)
+        public UserService(IOptions<Authentication> authentication, IUserRepository userRepository)
         {
             _authentication = authentication.Value;
+            _userRepository = userRepository;
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
@@ -49,7 +30,7 @@ namespace WebApi.Services
             if (model == null)
                 return null;
 
-            var user = _users.SingleOrDefault(x => x.Email == model.Email && x.Password == model.Password);
+            var user = _userRepository.Authenticate(model.Password, model.Email);
 
             if (user == null)
                 return null;
@@ -59,11 +40,9 @@ namespace WebApi.Services
             return new AuthenticateResponse(user, token);
         }
 
-        public IEnumerable<User> GetAll()
-            => _users;
+        public IEnumerable<User> GetAll() => _userRepository.GetAll();
 
-        public User GetByEmail(string email)
-            => _users.FirstOrDefault(x => x.Email == email);
+        public User GetByEmail(string email) => _userRepository.GetByEmail(email);
 
         private string GenerateJwtToken(User user)
         {
