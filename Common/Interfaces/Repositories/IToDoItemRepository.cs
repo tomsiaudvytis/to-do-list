@@ -6,7 +6,7 @@ namespace Common.Interfaces.Repositories
     public interface IToDoItemRepository
     {
         ToDoItem GetItemById(int id);
-        IEnumerable<ToDoItem> GetAllUserItems(User user);
+        IEnumerable<ToDoItem> GetAllUserItems(int id);
         void AddItem(ToDoItem item);
         void AddMultipleItems(IEnumerable<ToDoItem> items);
         void DeleteItem(ToDoItem item);

@@ -31,9 +31,9 @@ namespace DataAccessLayer.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<ToDoItem> GetAllUserItems(User user)
+        public IEnumerable<ToDoItem> GetAllUserItems(int id)
         {
-            return _context.ToDoItems.Where(items => items.AssignedToId == user.Id);
+            return _context.ToDoItems.Where(items => items.AssignedToId == id);
         }
 
         public ToDoItem GetItemById(int id)
