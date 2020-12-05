@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Common;
 
 namespace WebApi.Services
 {
@@ -23,7 +24,7 @@ namespace WebApi.Services
                 LastName = "User",
                 Password = "1234567891012",
                 Email = "some@email.com",
-                Role = Policies.User
+                Role = UserRoles.User
             },
             new User
             {
@@ -32,7 +33,7 @@ namespace WebApi.Services
                 LastName = "User2",
                 Password = "1234567891012",
                 Email = "some2@email.com",
-                Role = Policies.Admin
+                Role = UserRoles.Admin
             }
         };
 

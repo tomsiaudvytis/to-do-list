@@ -1,4 +1,5 @@
-﻿using Common.Interfaces.Services;
+﻿using Common;
+using Common.Interfaces.Services;
 using Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = Policies.Admin)]
+        [Authorize(Policy = UserRoles.Admin)]
         public IActionResult GetUsers(string email)
         {
             if (string.IsNullOrEmpty(email))

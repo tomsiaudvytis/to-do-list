@@ -13,8 +13,6 @@ namespace Common.Models
         public int Id { get; set; }
 
         [Column("AssignedToId")]
-        //[ForeignKey("AssignedToIdFK")]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AssignedToId { get; set; }
 
         [Column("Name")]
