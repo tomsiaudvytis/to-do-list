@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common.Interfaces.Repositories;
 using Common.Models;
 
@@ -15,32 +15,36 @@ namespace DataAccessLayer.Repositories
 
         public void AddItem(ToDoItem item)
         {
-            throw new NotImplementedException();
+            _context.ToDoItems.Add(item);
+            _context.SaveChanges();
         }
 
         public void AddMultipleItems(IEnumerable<ToDoItem> items)
         {
-            throw new NotImplementedException();
+            _context.ToDoItems.AddRange(items);
+            _context.SaveChanges();
         }
 
         public void DeleteItem(ToDoItem item)
         {
-            throw new NotImplementedException();
+            _context.ToDoItems.Remove(item);
+            _context.SaveChanges();
         }
 
         public IEnumerable<ToDoItem> GetAllUserItems(User user)
         {
-            throw new NotImplementedException();
+            return _context.ToDoItems.Where(items => items.AssignedToId == user.Id);
         }
 
         public ToDoItem GetItemById(int id)
         {
-            throw new NotImplementedException();
+            return _context.ToDoItems.Where(item => item.Id == id).FirstOrDefault();
         }
 
         public void UpdateItem(ToDoItem item)
         {
-            throw new NotImplementedException();
+            _context.ToDoItems.Update(item);
+            _context.SaveChanges();
         }
     }
 }

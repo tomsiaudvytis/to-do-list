@@ -36,6 +36,7 @@ namespace WebApi
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IToDoItemRepository, ToDoItemRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IToDoITemService, ToDoITemService>();
 
             services.Configure<Authentication>(options => Configuration.GetSection("Authentication").Bind(options));
         }

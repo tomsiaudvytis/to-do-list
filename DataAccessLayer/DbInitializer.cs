@@ -12,8 +12,9 @@ namespace DataAccessLayer
 
             var users = new User[]
             {
-            new User { FirstName = "Test", LastName = "User", Password = "1234567891012", Email = "some@email.com", Role = UserRoles.User },
-            new User { FirstName = "Test2", LastName = "User2", Password = "1234567891012", Email = "some2@email.com", Role = UserRoles.Admin }
+            new User { FirstName = "Test", LastName = "Admin", Password = "1234567891012", Email = "user@email.com", Role = UserRoles.User },
+            new User { FirstName = "Test2", LastName = "User1", Password = "1234567891012", Email = "admin@email.com", Role = UserRoles.Admin },
+            new User { FirstName = "Test3", LastName = "User2", Password = "1234567891012", Email = "admin@email.com", Role = UserRoles.Admin }
             };
 
             foreach (var user in users)
@@ -31,6 +32,9 @@ namespace DataAccessLayer
                 new ToDoItem {AssignedToId = 1, IsComplete = true, Name = "Task 5"},
                 new ToDoItem {AssignedToId = 2, IsComplete = false, Name = "Task 6"},
                 new ToDoItem {AssignedToId = 1, IsComplete = false, Name = "Task 7"},
+                new ToDoItem {AssignedToId = 3, IsComplete = false, Name = "Task 8"},
+                new ToDoItem {AssignedToId = 3, IsComplete = false, Name = "Task 9"},
+                new ToDoItem {AssignedToId = 3, IsComplete = false, Name = "Task 10"},
             };
             foreach (var item in items)
             {

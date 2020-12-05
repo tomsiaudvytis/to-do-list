@@ -13,7 +13,7 @@ namespace Common.Models
         public int Id { get; set; }
 
         [Column("AssignedToId")]
-        public int AssignedToId { get; set; }
+        public int? AssignedToId { get; set; }
 
         [Column("Name")]
         [Required]
