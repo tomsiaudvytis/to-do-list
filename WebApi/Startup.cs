@@ -3,6 +3,7 @@ using Common.Interfaces.Repositories;
 using Common.Interfaces.Services;
 using DataAccessLayer;
 using DataAccessLayer.Repositories;
+using Logger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,8 @@ namespace WebApi
             services.AddScoped<IToDoItemRepository, ToDoItemRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IToDoITemService, ToDoITemService>();
+            services.AddScoped<ILogger, Logger.Logger>();
+
 
             services.Configure<Authentication>(options => Configuration.GetSection("Authentication").Bind(options));
         }

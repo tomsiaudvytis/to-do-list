@@ -13,7 +13,7 @@ namespace WebApi
 
         public static AuthorizationPolicy UserPolicy()
             => new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
-                                               .RequireRole(UserRoles.User)
+                                               .RequireRole(UserRoles.User, UserRoles.Admin)
                                                .Build();
     }
 }

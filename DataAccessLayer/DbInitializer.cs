@@ -12,9 +12,9 @@ namespace DataAccessLayer
 
             var users = new User[]
             {
-            new User { FirstName = "Test", LastName = "Admin", Password = "1234567891012", Email = "user@email.com", Role = UserRoles.User },
-            new User { FirstName = "Test2", LastName = "User1", Password = "1234567891012", Email = "admin@email.com", Role = UserRoles.Admin },
-            new User { FirstName = "Test3", LastName = "User2", Password = "1234567891012", Email = "admin@email.com", Role = UserRoles.Admin }
+            new User { FirstName = "Test", LastName = "User", Password = "1234567891012", Email = "user@email.com", Role = UserRoles.User },
+            new User { FirstName = "Test2", LastName = "Admin1", Password = "1234567891012", Email = "admin1@email.com", Role = UserRoles.Admin },
+            new User { FirstName = "Test3", LastName = "Admin2", Password = "1234567891012", Email = "admin1@email.com", Role = UserRoles.Admin }
             };
 
             foreach (var user in users)

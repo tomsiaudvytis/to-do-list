@@ -53,6 +53,7 @@ namespace WebApi.Services
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("role", user.Role),
+                new Claim("user_id", user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
